@@ -48,7 +48,17 @@ public class BankingTest {
 		// Le dernier paramètre correspond à la marge d'erreur tolérable
 		assertEquals("Balance incorrecte !", 100.0f, balance, 0.001f);
 	}
-
+        
+        @Test (expected = Exception.class)
+	public void negativeSold() throws SQLException, Exception {
+                myDAO.bankTransferTransaction(0, 1, 200.0f);
+	}
+        
+	@Test (expected = Exception.class)
+	public void existenceDebitor() throws SQLException, Exception {
+            myDAO.bankTransferTransaction(99, 1, 10f);	
+	}
+        
 	@Test
 	public void successfulTransfer() throws Exception {
 		float amount = 10.0f;
